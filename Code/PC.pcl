@@ -1,0 +1,311 @@
+include "PC_Globals.pcl";
+include "PC_Helpers.pcl";
+
+preset int Age = 18;
+preset int Gender = 1;	# Female = 2;Male = 1
+preset int Group_No = 1;
+preset int Stim_Group = 1;
+
+##  Set first stim
+if (Stim_Group != 1) then
+	CSm.set_filename("Dog1.jpg");
+	CSm.load();
+	CSp.set_filename("Dog6.jpg");
+	CSp.load();
+end;
+
+display_window.set_font_style(display_style_bold);
+# use subject name + time and data for filenames
+string logfile_name;
+logfile_name = logfile.subject() + "_pc_" + date_time("hhnnss_dd-mm-yyyy");
+
+# set logfile name for this trial
+logfile.set_filename(logfile_name + ".log");
+int subid = int(logfile.subject());
+#------------------------------------------------------------------------------
+# setup text log file name (for saving the 150 trials for this subject)
+#------------------------------------------------------------------------------
+# use logfile name for filename but with "txt" extension
+
+output_file out = new output_file;
+out.open(logfile.subject()+"_pc" + ".xls");
+out.print("student number: "+logfile.subject()+"\t"+"Age: "+string(Age)+"\t"+"Gender: "+string(Gender)+"\t"+"Group: "+string(Group_No)+"\n");	#print the trial index
+out.print("Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n");	#print the trial index
+
+#------------------------------------------------------------------------------
+# Setup output port
+#------------------------------------------------------------------------------
+if (output_port_manager.port_count() == 0) then
+   term.print( "Forgot to add an output port!" )
+end;
+output_port oport = output_port_manager.get_port( 1 );
+oport.set_pulse_width( 5 );
+oport.send_code( 255 );
+
+fixation_trial.set_duration(5000/SPEED_UP);
+CSp_trial.set_duration(10000/SPEED_UP);
+CSm_trial.set_duration(8000/SPEED_UP);
+CSm_trial2.set_duration(2000/SPEED_UP);
+blank_trial.set_duration(5000/SPEED_UP);
+CSm_rating_trial.set_duration(5000/SPEED_UP);
+CSp_rating_trial.set_duration(5000/SPEED_UP);
+
+#ToD:
+#load the filler images to the array
+
+build_stim_list(NUM_AQUI, IS_CSM);
+sort_stim_list(NUM_AQUI, Group_No, IS_CSM);
+
+# for testing purpose
+/*build_stim_list(NUM_AQUI, IS_POLY2);
+sort_stim_list(NUM_AQUI, Group_No, IS_POLY2);
+build_stim_list(NUM_AQUI, IS_POLY3);
+sort_stim_list(NUM_AQUI, Group_No, IS_POLY3);
+build_stim_list(NUM_AQUI, IS_POLY4);
+sort_stim_list(NUM_AQUI, Group_No, IS_POLY4);
+build_stim_list(NUM_AQUI, IS_POLY5);
+sort_stim_list(NUM_AQUI, Group_No, IS_POLY5);
+loop 
+	int j = 1;
+until 
+	j > NUM_AQUI
+begin
+	term.print_line(string(j) + ":\t" + string(IS_POLY[j]) + "\t" + string(IS_POLY2[j]) + "\t" + string(IS_POLY3[j]) + "\t" + string(IS_POLY4[j]) + "\t" + string(IS_POLY5[j]));
+	j=j+1;
+end;*/
+
+int phase = 1;
+int dog = 0;
+int rndval = 0;
+int first = 0;
+int second = 0;
+if (Group_No == 1)then
+	first = 1;
+	second = 2;
+else
+	first = 2;
+	second = 1;
+end;
+
+
+term.print("Started\n");
+#start the actual experiment
+#PRACTICE_LIST.shuffle();
+welcome_1.present();
+welcome_2.present();
+welcome_3.present();
+scale_instruction_trial.present();
+int response_button1;
+int response_button2;
+
+############## Practice Start Here #################
+if (!SKIP_TEST) then
+	CSp_trial.present();
+	if (bool( response_manager.response_count() )) then
+		stimulus_data last = stimulus_manager.last_stimulus_data();
+		CSp_rate_pic.remove_part(2);
+		if (10000-last.reaction_time()>50) then
+		CSp_trial.set_duration(10000-last.reaction_time());
+		end;
+		CSp_trial.present();
+		term.print_line(string( last.reaction_time() ));
+		CSp_rate_pic.insert_part(2, rate_now_text,0, 370);
+	end;
+	dog = 1;
+	#response_button1 = get_response();
+	blank_trial.present();
+	rndval = random(5000, 15000)/SPEED_UP;
+	CSp_rating_trial.set_duration(rndval);
+	#triangle_rating_trial.present();
+
+	CSp_rating_trial.present();
+	if (bool( response_manager.response_count() )) then
+		stimulus_data last = stimulus_manager.last_stimulus_data();
+		response_pic_CSp.remove_part(3);
+		response_pic_CSp.remove_part(2);
+		if (5000-last.reaction_time()>50) then
+		CSp_rating_trial.set_duration(5000-last.reaction_time());
+		end;
+		CSp_rating_trial.present();
+		response_pic_CSp.insert_part(2, reaction_text, 0, 370);
+		response_pic_CSp.insert_part(3, scale_bmp, 0, -425);
+	end;						
+
+	break_trial.present();
+end;
+
+print_1d_bool_array(IS_CSM);
+
+phase = 1;
+
+############## Aquisition Phase ##################
+if (!SKIP_AQUI) then
+	int i=0;
+	loop 
+		i = 1;
+	until 
+		i > NUM_AQUI
+	begin
+		
+		fixation_trial.present();
+		
+		if (i == 1)then
+			fixation_trial.set_duration(38000);		#   Change break to 38 seconds
+		end;
+		
+			if (IS_CSM[i] == false) then
+				#
+				CSp_bare_trial.present();
+				dog = 1;
+			else
+				
+				CSm_bare_trial.present();
+				
+				CSm_trial2.present();
+				dog = 2;
+				
+			end;
+
+			#blank_trial.present();
+		
+		#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
+		save_trail_data(phase, i, dog, out);
+		term.print("\n");
+		i = i + 1;
+	end;
+	fixation_trial.set_duration(5000);
+	break_trial.present();
+end;
+############## Aquisition Phase ##################
+build_stim_list(NUM_EXTINCT, IS_CSM);
+sort_stim_list(NUM_EXTINCT, Group_No, IS_CSM);
+CSm_trial.set_duration(10000/SPEED_UP);
+phase = 2;
+print_1d_bool_array(IS_CSM);
+CSm_bare_trial.set_duration(8000);		##  Set duration to 8 seconds to compensate gor no growl
+############## Extinction  Phase ##################
+if (!SKIP_EXTINCT) then
+	loop 
+		int i = 1;
+	until 
+		i > NUM_EXTINCT
+	begin
+		fixation_trial.present();
+		
+		if (i == 1)then
+			fixation_trial.set_duration(38000);		#   Change break to 38 seconds
+		end;
+		
+			if (IS_CSM[i] == false) then 
+				CSp_bare_trial.present();
+				
+				dog = 1;
+			else
+				CSm_bare_trial.present();
+				
+				dog = 2;
+			end;
+			#blank_trial.present();
+		
+		#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
+		save_trail_data(phase, i, dog, out);
+		term.print("\n");
+		i = i + 1;
+	end;	
+	break_trial.present();
+end;
+############## Extinction  Phase ##################
+phase = 3;
+############## Reinstatement  Phase ###############
+#############  NOT USED IN GENERALISATION  ########
+if (!SKIP_REIN) then
+	loop
+		int i = 1
+	until 
+		i > NUM_REIN
+	begin
+		if (Group_No == 1) then
+			tone_reinstatement_trial.present();
+			blank_reinstatement_trial.present();
+		else
+			blank_reinstatement_trial.present();
+			blank_reinstatement_trial.present();
+		end;
+		i = i + 1;
+	end;
+	break_trial.present();
+end;
+############## Reinstatement  Phase ###############
+build_test_stim_list(NUM_GENERALISATION, IS_CSDC, Group_No);
+CSm_trial.set_duration(10000/SPEED_UP);
+phase = 3;
+fixation_trial.set_duration(5000);
+print_1d_bool_array(IS_CSDC);
+#################### Generalisation  Phase ##################
+if (!SKIP_GEN)then
+	loop 
+		int i = 1;
+	until 
+		i > NUM_GENERALISATION
+	begin
+		fixation_trial.present();
+		
+		if (i == 1)then
+			fixation_trial.set_duration(38000);
+		end;
+		
+			if (IS_CSDC[i] == false) then 
+				CSDC_bare_trial.present();
+				
+				dog = 5;
+			else
+				CSDD_bare_trial.present();
+				
+				dog = 6;
+			end;
+			#blank_trial.present();
+			
+		#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
+		save_trail_data(phase, i, dog, out);
+		term.print("\n");
+		i = i + 1;
+	end;	
+	break_trial.present();
+end;
+#################### Generalisation  Phase ##################
+fixation_trial.set_duration(5000);
+build_test_stim_list(NUM_GENERALISATION, IS_CSM_TEST, Group_No);
+CSm_trial.set_duration(10000/SPEED_UP);
+phase = 4;
+print_1d_bool_array(IS_CSM_TEST);
+#################### Test  Phase ##################
+loop 
+	int i = 1;
+until 
+	i > NUM_TEST_EXT
+begin
+	fixation_trial.present();
+	
+	if (i == 1) then
+		fixation_trial.set_duration(38000);
+	end;
+	
+		if (IS_CSM_TEST[i] == false) then 
+			CSp_bare_trial.present();
+			
+			dog = 1;
+		else
+			CSm_bare_trial.present();
+			
+			dog = 2;
+		end;
+		#blank_trial.present();
+		
+	#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
+	save_trail_data(phase, i, dog, out);
+	term.print("\n");
+	i = i + 1;
+end;	
+#################### Test  Phase ##################
+
+Goodbye_trial.present();
