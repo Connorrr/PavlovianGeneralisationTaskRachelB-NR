@@ -1,5 +1,5 @@
 <ver>17.2</ver>
-<efn>C:\Projects\PavlovianConditioning - Rachel 1\PC.exp</efn>
+<efn>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\PC.exp</efn>
 <author>Connor Reid</author>
 <con>
 <pause>P</pause>
@@ -34,13 +34,13 @@
 <lfn></lfn>
 </docs>
 <dp_list></dp_list>
-<dsd>C:\Projects\PavlovianConditioning - Rachel 1\Stimuli</dsd>
+<dsd>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Stimuli</dsd>
 <dxv>8</dxv>
 <efs>
-<filename>C:\Projects\PavlovianConditioning - Rachel 1\Code\PC.sce</filename>
-<filename>C:\Projects\PavlovianConditioning - Rachel 1\Code\PC.pcl</filename>
-<filename>C:\Projects\PavlovianConditioning - Rachel 1\Code\PC_Helpers.pcl</filename>
-<filename>C:\Projects\PavlovianConditioning - Rachel 1\Code\PC_Globals.pcl</filename>
+<filename>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Code\PC.sce</filename>
+<filename>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Code\PC.pcl</filename>
+<filename>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Code\PC_Helpers.pcl</filename>
+<filename>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Code\PC_Globals.pcl</filename>
 </efs>
 <exclusive_mouse>1</exclusive_mouse>
 <exp_version>1.0</exp_version>
@@ -113,7 +113,7 @@
 </chan>
 </ip_chans>
 <isb>10000</isb>
-<lfd>C:\Projects\PavlovianConditioning - Rachel 1\Log</lfd>
+<lfd>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Log</lfd>
 <lnb>2</lnb>
 <lno>3</lno>
 <log>
@@ -133,7 +133,7 @@
 <maxpv></maxpv>
 <minpv></minpv>
 <mss>4</mss>
-<nam>Pavlovian Conditioning Dog1-B</nam>
+<nam>Pavlovian Conditioning Dog1-BNR</nam>
 <one_processor>2</one_processor>
 <oports>
 <p>
@@ -392,7 +392,7 @@
 <offset>39</offset>
 <offset>40</offset>
 </idv>
-<sfn>C:\Projects\PavlovianConditioning - Rachel 1\Code\PC.sce</sfn>
+<sfn>C:\Projects\PavlovianGeneralisationTaskRachelB-NR\Code\PC.sce</sfn>
 </sce>
 <sct>
 <capture_device>
