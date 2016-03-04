@@ -95,8 +95,8 @@ term.print("Started\n");
 #PRACTICE_LIST.shuffle();
 welcome_1.present();
 welcome_2.present();
-welcome_3.present();
-scale_instruction_trial.present();
+#welcome_3.present();
+#scale_instruction_trial.present();
 int response_button1;
 int response_button2;
 
