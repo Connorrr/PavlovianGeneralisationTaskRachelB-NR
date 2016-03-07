@@ -50,26 +50,33 @@ end;
 sub 
 	build_test_stim_list(int size, array <bool,1>& trial_list, int group_number)
 begin
-	#get equal number of poly and triangle here
-	loop 
-		int j = 1;
-	until 
-		j > size
-	begin
-		if (j <= (size/2))then
-			if (group_number == 1)then
-				trial_list[j] = false;
+	if (random(1,2) == 1) then
+		loop 
+			int j = 1;
+		until 
+			j > size
+		begin
+			if (j <= (size/2))then
+				if (group_number == 1)then
+					trial_list[j] = false;
+				else
+					trial_list[j] = true;
+				end;
 			else
-				trial_list[j] = true;
+				if (group_number == 1)then
+					trial_list[j] = true;
+				else
+					trial_list[j] = false;
+				end;
 			end;
-		else
-			if (group_number == 1)then
-				trial_list[j] = true;
-			else
-				trial_list[j] = false;
-			end;
+			j=j+1;
 		end;
-		j=j+1;
+	else
+		if (group_number == 1)then
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = false; trial_list[4] = true;
+		else
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = true; trial_list[4] = false;
+		end;
 	end;
 end;
 
@@ -88,7 +95,7 @@ begin
 		int n = 2*val-(size/2-1);
 		#term.print_line(n);
 		
-			list_1.add(2);									# Changed from list_1.add(2);	
+			list_1.add(1);									# Changed from list_1.add(2);
 			loop int i = 1 until i > m-1 begin		# Changed from i > m
 				list_1.add(2);
 				i=i+1;

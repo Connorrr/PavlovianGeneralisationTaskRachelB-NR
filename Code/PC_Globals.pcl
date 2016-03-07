@@ -24,8 +24,8 @@ array <bool> IS_CSM_TEST[NUM_TEST_EXT];
 
 bool SKIP_TEST = true;		#set true to skip test trial at the beginning 
 
-bool SKIP_AQUI = false;		#set to true to skip Aquisition phase
-bool SKIP_EXTINCT = false;	#set true to skip Extinction phase
+bool SKIP_AQUI = true;		#set to true to skip Aquisition phase
+bool SKIP_EXTINCT = true;	#set true to skip Extinction phase
 bool SKIP_GEN = false;		#set true to skip Generalisation phase
 
 bool SKIP_REIN = true;		#set true to skip Reinstatement phase
