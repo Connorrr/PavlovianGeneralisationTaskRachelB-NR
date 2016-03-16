@@ -148,7 +148,7 @@ if (!SKIP_AQUI) then
 	until 
 		i > NUM_AQUI
 	begin
-		
+		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		fixation_trial.present();
 		
 			if (IS_CSM[i] == false) then
@@ -190,6 +190,7 @@ CSm_trial.set_duration(10000/SPEED_UP);
 phase = 2;
 print_1d_bool_array(IS_CSM);
 CSm_bare_trial.set_duration(8000);		##  Set duration to 8 seconds to compensate gor no growl
+fixation_trial.set_duration(5000);
 ############## Extinction  Phase ##################
 if (!SKIP_EXTINCT) then
 	loop 
@@ -266,6 +267,7 @@ if (!SKIP_GEN)then
 	until 
 		i > NUM_GENERALISATION
 	begin
+		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		fixation_trial.present();
 		
 			if (IS_CSDC[i] == false) then 
@@ -301,6 +303,7 @@ loop
 until 
 	i > NUM_TEST_EXT
 begin
+	fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 	fixation_trial.present();
 	
 		if (IS_CSM_TEST[i] == false) then 
