@@ -291,6 +291,12 @@ trial {
 	picture CSm_pic;
 } CSm_bare_trial;
 
+trial {
+	trial_duration = 5000;
+	trial_type = fixed;
+	picture CSm_pic;
+} CSm_short_bare_trial;
+
 picture {
 	bitmap CSDA;
 	x = 0; y = 0;
