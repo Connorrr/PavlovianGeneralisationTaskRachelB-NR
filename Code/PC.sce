@@ -402,7 +402,7 @@ trial {
 } CSDD_bare_trial;
 
 trial {
-	trial_duration = 2000;
+	trial_duration = 3000;
 	trial_type = fixed;
 	picture CSm_pic;
 	sound {wavefile snarl; }CSm_sound;

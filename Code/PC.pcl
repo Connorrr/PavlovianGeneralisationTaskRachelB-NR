@@ -43,9 +43,9 @@ oport.set_pulse_width( 5 );
 oport.send_code( 255 );
 
 fixation_trial.set_duration(5000/SPEED_UP);
-CSp_trial.set_duration(10000/SPEED_UP);
+CSp_trial.set_duration(8000/SPEED_UP);
 CSm_trial.set_duration(8000/SPEED_UP);
-CSm_trial2.set_duration(2000/SPEED_UP);
+CSm_trial2.set_duration(3000/SPEED_UP);
 blank_trial.set_duration(5000/SPEED_UP);
 CSm_rating_trial.set_duration(5000/SPEED_UP);
 CSp_rating_trial.set_duration(5000/SPEED_UP);
@@ -139,7 +139,7 @@ end;
 print_1d_bool_array(IS_CSM);
 
 phase = 1;
-
+fixation_trial.set_duration(5000);
 ############## Aquisition Phase ##################
 if (!SKIP_AQUI) then
 	int i=0;
@@ -148,8 +148,10 @@ if (!SKIP_AQUI) then
 	until 
 		i > NUM_AQUI
 	begin
-		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		fixation_trial.present();
+		if (i == 1) then
+			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+		end;
 		
 			if (IS_CSM[i] == false) then
 				oport.send_code( 2 );
@@ -162,7 +164,7 @@ if (!SKIP_AQUI) then
 				trial_type = "CS-";
 			else
 				oport.send_code( 1 );
-				CSm_bare_trial.present();
+				CSm_short_bare_trial.present();
 				oport.send_code( 64 );
 				CSm_trial2.present();
 				oport.send_code( 1 );
@@ -201,7 +203,7 @@ if (!SKIP_EXTINCT) then
 		fixation_trial.present();
 		
 		if (i == 1)then
-			fixation_trial.set_duration(38000);		#   Change break to 38 seconds
+			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));		#   Change break to 38 seconds
 		end;
 		
 			if (IS_CSM[i] == false) then 
@@ -267,8 +269,10 @@ if (!SKIP_GEN)then
 	until 
 		i > NUM_GENERALISATION
 	begin
-		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		fixation_trial.present();
+		if ( i == 1 )then 
+			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+		end;
 		
 			if (IS_CSDC[i] == false) then 
 				oport.send_code( 16 );
@@ -294,17 +298,20 @@ if (!SKIP_GEN)then
 end;
 #################### Generalisation  Phase ##################
 build_test_stim_list(NUM_GENERALISATION, IS_CSM_TEST, Group_No);
-CSm_trial.set_duration(10000/SPEED_UP);
+CSm_bare_trial.set_duration(8000/SPEED_UP);
 phase = 4;
 print_1d_bool_array(IS_CSM_TEST);
+fixation_trial.set_duration(5000);
 #################### Test  Phase ##################
 loop 
 	int i = 1;
 until 
 	i > NUM_TEST_EXT
 begin
-	fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 	fixation_trial.present();
+	if (i==1)then
+		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+	end;
 	
 		if (IS_CSM_TEST[i] == false) then 
 			oport.send_code( 2 );
