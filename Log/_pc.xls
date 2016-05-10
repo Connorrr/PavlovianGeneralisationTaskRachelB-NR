@@ -1,3 +1,10 @@
-student number: 	Age: 18	Gender: 1	Group: 2Stim Group: 1
-Phase	Trial Number	Dog	Trial Type
-1	1	2	CS+
+student number: 	Age: 18	Gender: 1	Group: 1Stim Group: 1
+Phase	Trial Number	Dog	Trial Type	Start Stim	End Stim
+4	1	1	CS-	4684	12688.6
+4	2	2	CS+	35745.1	43767.8
+4	3	1	CS-	66606.3	74613.5
+4	4	1	CS-	92839	100854.8
+4	5	2	CS+	118431.3	126445.5
+4	6	1	CS-	145718	153721.1
+4	7	2	CS+	175811.6	183816.1
+4	8	2	CS+	206486.6	214494.9

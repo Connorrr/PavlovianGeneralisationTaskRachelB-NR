@@ -50,32 +50,30 @@ end;
 sub 
 	build_test_stim_list(int size, array <bool,1>& trial_list, int group_number)
 begin
-	if (random(1,2) == 1) then
-		loop 
-			int j = 1;
-		until 
-			j > size
-		begin
-			if (j <= (size/2))then
-				if (group_number == 1)then
-					trial_list[j] = false;
-				else
-					trial_list[j] = true;
-				end;
-			else
-				if (group_number == 1)then
-					trial_list[j] = true;
-				else
-					trial_list[j] = false;
-				end;
-			end;
-			j=j+1;
+	int rnd = random(1,5);
+	if (group_number == 1)then		##  This is a shortcut function
+		if (rnd == 1) then
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = false; trial_list[4] = false; trial_list[5] = true; trial_list[6] = false; trial_list[7] = true; trial_list[8] = true;
+		elseif (rnd == 2) then
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = true; trial_list[4] = false; trial_list[5] = true; trial_list[6] = false; trial_list[7] = true; trial_list[8] = false;
+		elseif (rnd == 3) then
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = true; trial_list[4] = false; trial_list[5] = false; trial_list[6] = true; trial_list[7] = false; trial_list[8] = true;
+		elseif (rnd == 4) then
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = false; trial_list[4] = true; trial_list[5] = true; trial_list[6] = false; trial_list[7] = false; trial_list[8] = true;
+		else
+			trial_list[1] = false; trial_list[2] = true; trial_list[3] = false; trial_list[4] = false; trial_list[5] = true; trial_list[6] = true; trial_list[7] = false; trial_list[8] = true;
 		end;
 	else
-		if (group_number == 1)then
-			trial_list[1] = false; trial_list[2] = true; trial_list[3] = false; trial_list[4] = true;
+		if (rnd == 1) then
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = false; trial_list[4] = true; trial_list[5] = true; trial_list[6] = false; trial_list[7] = true; trial_list[8] = true;
+		elseif (rnd == 2) then
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = true; trial_list[4] = false; trial_list[5] = true; trial_list[6] = false; trial_list[7] = true; trial_list[8] = false;
+		elseif (rnd == 3) then
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = true; trial_list[4] = false; trial_list[5] = false; trial_list[6] = true; trial_list[7] = false; trial_list[8] = true;
+		elseif (rnd == 4) then
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = false; trial_list[4] = true; trial_list[5] = true; trial_list[6] = false; trial_list[7] = false; trial_list[8] = true;
 		else
-			trial_list[1] = true; trial_list[2] = false; trial_list[3] = true; trial_list[4] = false;
+			trial_list[1] = true; trial_list[2] = false; trial_list[3] = true; trial_list[4] = false; trial_list[5] = true; trial_list[6] = true; trial_list[7] = false; trial_list[8] = true;
 		end;
 	end;
 end;
@@ -204,13 +202,15 @@ begin
 end;
 
 sub
-save_trail_data(int phase, int trial_num, int dog, output_file out, string tt)
+save_trail_data(int phase, int trial_num, int dog, output_file out, string tt, double start_time, double end_time)
 begin
 
 	out.print(string(phase) + "\t");
 	out.print(string(trial_num) + "\t");
 	out.print(string(dog) + "\t");
-	out.print(tt + "\n");
+	out.print(tt + "\t");
+	out.print(string(start_time) + "\t");
+	out.print(string(end_time) + "\n");
 
 end;
 #

@@ -1,4 +1,4 @@
-<ver>18.1</ver>
+<ver>17.2</ver>
 <efn>C:\Projects\PavlovianGeneralisationTaskBNR\PC.exp</efn>
 <author>Connor Reid</author>
 <con>
@@ -137,22 +137,13 @@
 <one_processor>2</one_processor>
 <oports>
 <p>
-<ama>0</ama>
-<ami>0</ami>
-<at>0</at>
-<dpw>5</dpw>
-<dsdi>0</dsdi>
-<dsi>0</dsi>
-<dsn>Data port</dsn>
-<igm>0</igm>
-<il>0</il>
-<ivm>0</ivm>
-<piai>LPT1</piai>
-<pian>Parallel Port</pian>
-<pihpn>LPT1</pihpn>
-<pindex>2</pindex>
-<rs>1</rs>
-<rt>0</rt>
+<cs></cs>
+<is></is>
+<os></os>
+<piai>COM1</piai>
+<pian>Serial Port</pian>
+<pihpn>COM1</pihpn>
+<pindex>0</pindex>
 </p>
 </oports>
 <out_encrypt_key></out_encrypt_key>
@@ -247,11 +238,6 @@
 <name>HID Keyboard Device</name>
 </device>
 <device>
-<device_type>3</device_type>
-<dx_device_type>0</dx_device_type>
-<name>HID Keyboard Device 1</name>
-</device>
-<device>
 <abs_axis>
 <dead_zone>0</dead_zone>
 <max>1000</max>
@@ -294,63 +280,9 @@
 <name>HID-compliant mouse</name>
 </device>
 <device>
-<abs_axis>
-<dead_zone>0</dead_zone>
-<max>1000</max>
-<min>-1000</min>
-<name>X-axis</name>
-<saturation>1</saturation>
-</abs_axis>
-<abs_axis>
-<dead_zone>0</dead_zone>
-<max>1000</max>
-<min>-1000</min>
-<name>Y-axis</name>
-<saturation>1</saturation>
-</abs_axis>
-<axis>
-<max>1000</max>
-<min>-1000</min>
-<name>X-axis</name>
-<restricted>1</restricted>
-<scale>1</scale>
-</axis>
-<axis>
-<max>1000</max>
-<min>-1000</min>
-<name>Y-axis</name>
-<restricted>1</restricted>
-<scale>1</scale>
-</axis>
-<axis>
-<max>1000</max>
-<min>-1000</min>
-<name>Wheel</name>
-<restricted>1</restricted>
-<scale>1</scale>
-</axis>
-<device_type>2</device_type>
-<dx_device_type>0</dx_device_type>
-<max_raw_pos>65535</max_raw_pos>
-<min_raw_pos>0</min_raw_pos>
-<name>HID-compliant mouse 1</name>
-</device>
-<device>
 <device_type>9</device_type>
 <dx_device_type>0</dx_device_type>
 <name>sound device</name>
-</device>
-<device>
-<device_type>13</device_type>
-<dx_device_type>0</dx_device_type>
-<name>Speech Recognition</name>
-<speech>
-<engine_class></engine_class>
-<mc>0</mc>
-<rw>0</rw>
-<uwd>0</uwd>
-<vocab></vocab>
-</speech>
 </device>
 <device>
 <axis>
@@ -414,20 +346,6 @@
 <ibn>Z</ibn>
 <ibn>/</ibn>
 <idn>Keyboard</idn>
-<index>0</index>
-<index>1</index>
-<index>2</index>
-<index>3</index>
-<index>4</index>
-<index>5</index>
-<index>6</index>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
 <offset>2</offset>
 <offset>3</offset>
 <offset>4</offset>
@@ -458,36 +376,6 @@
 <ibn>;</ibn>
 <ibn>'</ibn>
 <idn>Keyboard</idn>
-<index>0</index>
-<index>1</index>
-<index>2</index>
-<index>3</index>
-<index>4</index>
-<index>5</index>
-<index>6</index>
-<index>7</index>
-<index>8</index>
-<index>9</index>
-<index>10</index>
-<index>11</index>
-<index>12</index>
-<index>13</index>
-<index>14</index>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
-<label></label>
 <offset>57</offset>
 <offset>47</offset>
 <offset>48</offset>
@@ -522,7 +410,6 @@
 <resp_dev>
 <combine>0</combine>
 <ignore></ignore>
-<max_rec_dur>10</max_rec_dur>
 <off_inter></off_inter>
 <off_thresh></off_thresh>
 <onset_mode>0</onset_mode>
@@ -535,17 +422,13 @@
 <buffer_length>1000</buffer_length>
 <custom_buf>sec_sw</custom_buf>
 <dup_channels>0</dup_channels>
-<ex_period>0</ex_period>
-<halt_on_drop>0</halt_on_drop>
-<halt_on_drop_count>1</halt_on_drop_count>
 <halt_on_underrun>1</halt_on_underrun>
+<hw_buffer>0</hw_buffer>
 <max_mix_length>400</max_mix_length>
 <min_mix_length>100</min_mix_length>
 <mixer>dx_software</mixer>
 <rewind_distance>10</rewind_distance>
-<sh_period>0</sh_period>
 <side_speakers>1</side_speakers>
-<use_rewind_distance>0</use_rewind_distance>
 </sde>
 <sdv>Primary Sound Driver</sdv>
 <show_dis>1</show_dis>
